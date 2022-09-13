@@ -14,7 +14,7 @@ services:
       # - PROXY_DOMAIN=code-server.my.domain #optional
       - DEFAULT_WORKSPACE=/config/workspace #optional
     # volumes:
-    #   - /Users/jiadong.chen/git/container/code-server/server1/config:/config
+    #   - ./config:/config
     ports:
       - 8443:8443
     restart: unless-stopped
