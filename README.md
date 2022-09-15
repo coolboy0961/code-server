@@ -7,14 +7,8 @@ cd code-server
 podman build --format docker --layers=false -t code-server-nodejs16:latest .
 ```
 
-server1のコンテナを起動
+code-serverのコンテナを起動
 ```
-cd code-server/server1
-podman-compose -f code-server.yml up -d
-```
-
-server2のコンテナを起動
-```
-cd code-server/server2
+cd code-server/nodejs-servers
 podman-compose -f code-server.yml up -d
 ```
