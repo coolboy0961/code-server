@@ -36,4 +36,9 @@ RUN apt update && \
     pip install pipenv && \
     /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension donjayamanne.python-extension-pack && \
     /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension dracula-theme.theme-dracula && \
-    /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension littlefoxteam.vscode-python-test-adapter
+    /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension littlefoxteam.vscode-python-test-adapter && \
+    /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension oderwat.indent-rainbow && \
+    /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension VisualStudioExptTeam.vscodeintellicode && \
+    /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension VisualStudioExptTeam.intellicode-api-usage-examples && \
+    /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension esbenp.prettier-vscode && \
+    /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension PKief.material-icon-theme
