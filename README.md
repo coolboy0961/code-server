@@ -26,3 +26,10 @@ code-serverのコンテナを起動
 cd code-server/python-servers
 podman-compose -f code-server.yml up -d
 ```
+
+# code-server 操作方法
+dirAもしくはdirBをworkspaceとして開く場合、下記コマンドを実行する
+```
+code-server ./dirA # opens ./dirA
+code-server ./dirB # opens ./dirB
+```
