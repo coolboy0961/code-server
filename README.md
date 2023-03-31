@@ -41,7 +41,7 @@ podman-compose -f code-server.yml up -d
 ```
 
 code-server learn-clean-architecture/api/laravel10.x/
-touch database-sqlite
+touch database.sqlite
 composer install
 composer unit-test
 composer serve
