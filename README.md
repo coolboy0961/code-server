@@ -26,6 +26,40 @@ code-serverのコンテナを起動
 cd code-server/python-servers
 podman-compose -f code-server.yml up -d
 ```
+
+# php-servers
+php の code-serverイメージを作成
+```
+cd code-server/php-servers
+podman build --format docker --layers=false -t code-server-php8:latest .
+```
+
+code-serverのコンテナを起動
+```
+cd code-server/php-servers
+podman-compose -f code-server.yml up -d
+```
+
+code-server learn-clean-architecture/api/laravel10.x/
+touch database-sqlite
+composer install
+composer unit-test
+composer serve
+composer api-test
+
+`/etc/php/8.2/cli/conf.d/20-xdebug.ini`の中身を下記に入れ替える（vscodeでxdebugを使うため）
+```
+; ここではコメントアウトで無効化しておいて、実行時にvscode側から有効化します
+;zend_extension = "xdebug.so"
+
+; 下記は常時設定しておきます
+xdebug.client_host = 127.0.0.1
+xdebug.client_port = "9003"
+xdebug.mode = debug
+xdebug.idekey = "PHPSTORM"
+xdebug.start_with_request = yes
+```
+
 ## 初期準備
 Themeを黒の方に変更
 ```
