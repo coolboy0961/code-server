@@ -26,9 +26,6 @@ metadata:
     app: code-server1-pod
   name: code-server1-pod
 spec:
-  securityContext:
-    runAsUser: 0
-    privileged: true
   containers:
     - env:
         - name: PASSWORD
@@ -38,9 +35,9 @@ spec:
         - name: TZ
           value: Asia/Tokyo
         - name: PUID
-          value: "0"
+          value: "1000"
         - name: PGID
-          value: "0"
+          value: "1000"
       image: quay.io/jiadchen/code-server-php8
       name: code-server1
       ports:

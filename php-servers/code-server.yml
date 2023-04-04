@@ -5,8 +5,8 @@ services:
     image: localhost/code-server-php8:latest
     container_name: code-server1
     environment:
-      - PUID=0
-      - PGID=0
+      - PUID=1000
+      - PGID=1000
       - TZ=Asia/Tokyo
       - PASSWORD=${PASSWORD} #optional
       # - SUDO_PASSWORD=password #optional
@@ -22,8 +22,8 @@ services:
     image: localhost/code-server-php8:latest
     container_name: code-server2
     environment:
-      - PUID=0
-      - PGID=0
+      - PUID=1000
+      - PGID=1000
       - TZ=Asia/Tokyo
       - PASSWORD=${PASSWORD} #optional
       # - SUDO_PASSWORD=password #optional
@@ -39,8 +39,8 @@ services:
     image: localhost/code-server-php8:latest
     container_name: code-server3
     environment:
-      - PUID=0
-      - PGID=0
+      - PUID=1000
+      - PGID=1000
       - TZ=Asia/Tokyo
       - PASSWORD=${PASSWORD} #optional
       # - SUDO_PASSWORD=password #optional
