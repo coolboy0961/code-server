@@ -27,11 +27,10 @@ cd code-server/python-servers
 podman-compose -f code-server.yml up -d
 ```
 
-openshiftにデプロイするために、ローカルで生成したイメージをquay.ioにプッシュ
-```
-docker tag localhost/code-server-php8 quay.io/jiadchen/code-server-php8:latest
-docker push quay.io/jiadchen/code-server-php8:latest
-```
+openshiftにデプロイするために、containerファイルをquay.ioにアップロードしてquay.ioにbuildしてもらう必要がある  
+なぜなら、MacOSでビルドしたイメージはarm用のものになっているので、openshift上で使えない可能性があります。quay.ioにビルドしてもらったほうが安全。  
+もしくはquay.ioをgithubとリンクづければいい。
+![](asset/README.md_2023-04-04-20-33-05.png)
 
 openshiftのweb terminalで下記コマンドを実行してcode-serverのrouteを作る
 ```
