@@ -27,6 +27,18 @@ cd code-server/python-servers
 podman-compose -f code-server.yml up -d
 ```
 
+openshiftにデプロイするために、ローカルで生成したイメージをquay.ioにプッシュ
+```
+docker tag localhost/code-server-php8 quay.io/jiadchen/code-server-php8:latest
+docker push quay.io/jiadchen/code-server-php8:latest
+```
+
+openshiftのweb terminalで下記コマンドを実行してcode-serverのrouteを作る
+```
+oc project code-server
+oc expose svc/<service-name>
+```
+
 # php-servers
 php の code-serverイメージを作成
 ```
@@ -40,6 +52,7 @@ cd code-server/php-servers
 podman-compose -f code-server.yml up -d
 ```
 
+## code-serverをブラウザで開いた後に下記環境構築作業を行う
 code-server learn-clean-architecture/api/laravel10.x/
 touch database.sqlite
 composer install
