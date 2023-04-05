@@ -3,6 +3,7 @@ version: "2.1"
 services:
   code-server1:
     image: localhost/code-server-php8:latest
+    # image: quay.io/jiadchen/code-server-php8
     container_name: code-server1
     environment:
       - PUID=1000
@@ -32,6 +33,7 @@ services:
         tail -f /dev/null
   code-server2:
     image: localhost/code-server-php8:latest
+    # image: quay.io/jiadchen/code-server-php8
     container_name: code-server2
     environment:
       - PUID=1000
@@ -61,6 +63,7 @@ services:
         tail -f /dev/null
   code-server3:
     image: localhost/code-server-php8:latest
+    # image: quay.io/jiadchen/code-server-php8
     container_name: code-server3
     environment:
       - PUID=1000
