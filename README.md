@@ -26,16 +26,22 @@ code-serverのコンテナを起動
 cd code-server/python-servers
 podman-compose -f code-server.yml up -d
 ```
-
-openshiftにデプロイするために、containerファイルをquay.ioにアップロードしてquay.ioにbuildしてもらう必要がある  
-なぜなら、MacOSでビルドしたイメージはarm用のものになっているので、openshift上で使えない可能性があります。quay.ioにビルドしてもらったほうが安全。  
-もしくはquay.ioをgithubとリンクづければいい。
-![](asset/README.md_2023-04-04-20-33-05.png)
-
-openshiftのweb terminalで下記コマンドを実行してcode-serverのrouteを作る
+## 初期準備
+Themeを黒の方に変更
 ```
-oc project code-server
-oc expose svc/<service-name>
+git clone https://github.com/coolboy0961/react-typescript-fastapi-postgresql.git
+code-server react-typescript-fastapi-postgresql/backend
+export PIPENV_VENV_IN_PROJECT=true && pipenv --python 3.10
+pipenv run sync
+```
+python環境がプロジェクトのvenvになっているかチェック
+Test Explorerにテストケースが表示されているかチェック
+unit-testを単独実行できるかチェック
+unit-testをdebugできるかチェック
+```
+pipenv run unit-test
+pipenv run start
+pipenv run api-test
 ```
 
 # php-servers
@@ -52,7 +58,8 @@ podman-compose -f code-server.yml up -d
 ```
 
 ## code-serverをブラウザで開いた後に下記環境構築作業を行う
-code-server learn-clean-architecture/api/laravel10.x/
+git clone https://github.com/coolboy0961/learn-clean-architecture.git
+cd learn-clean-architecture/api/laravel10.x/
 touch database.sqlite
 composer install
 composer unit-test
@@ -71,24 +78,18 @@ xdebug.mode = debug
 xdebug.idekey = "PHPSTORM"
 xdebug.start_with_request = yes
 ```
+## Openshiftへのデプロイ方法
+openshiftにデプロイするために、containerファイルをquay.ioにアップロードしてquay.ioにbuildしてもらう必要がある  
+なぜなら、MacOSでビルドしたイメージはarm用のものになっているので、openshift上で使えない可能性があります。quay.ioにビルドしてもらったほうが安全。  
+もしくはquay.ioをgithubとリンクづければいい。
+![](asset/README.md_2023-04-04-20-33-05.png)
 
-## 初期準備
-Themeを黒の方に変更
+openshiftのweb terminalで下記コマンドを実行してcode-serverのrouteを作る
 ```
-git clone https://github.com/coolboy0961/react-typescript-fastapi-postgresql.git
-code-server react-typescript-fastapi-postgresql/backend
-export PIPENV_VENV_IN_PROJECT=true && pipenv --python 3.10
-pipenv run sync
+oc project code-server
+oc expose svc/<service-name>
 ```
-python環境がプロジェクトのvenvになっているかチェック
-Test Explorerにテストケースが表示されているかチェック
-unit-testを単独実行できるかチェック
-unit-testをdebugできるかチェック
-```
-pipenv run unit-test
-pipenv run start
-pipenv run api-test
-```
+
 
 # code-server 操作方法
 dirAもしくはdirBをworkspaceとして開く場合、下記コマンドを実行する

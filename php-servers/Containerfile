@@ -15,33 +15,6 @@ RUN apt update && \
     mv ./composer.phar $(dirname $(which php))/composer && chmod +x "$_" && \
     git config --global user.name "Jiadong Chen" && \
     git config --global user.email "jiadchen@redhat.com" && \
-    # libcurl4-openssl-dev \
-    # libjpeg-dev \
-    # libonig-dev \
-    # libtidy-dev \
-    # bzip2 \
-    # build-essential \
-    # pkg-config \
-    # libxml2-dev \
-    # libssl-dev \
-    # libsqlite3-dev \
-    # libbz2-dev \
-    # libpng-dev \
-    # libxslt1-dev \
-    # libreadline-dev \
-    # libzip-dev && \
-    # git clone https://github.com/anyenv/anyenv ~/.anyenv && \
-    # echo 'export PATH="$HOME/.anyenv/bin:$PATH"' >> ~/.bashrc && \
-    # echo 'eval "$(anyenv init -)"' >> ~/.bashrc && \
-    # source ~/.bashrc && \
-    # anyenv --version && \
-    # anyenv install --force-init && \
-    # anyenv install phpenv && \
-    # source ~/.bashrc && \
-    # echo 'eval "$(phpenv init -)"' >> ~/.bashrc && \
-    # source ~/.bashrc && \
-    # phpenv install 8.2.3 && \
-    # phpenv global 8.2.3 && \
     /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension dracula-theme.theme-dracula && \
     /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension oderwat.indent-rainbow && \
     /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension esbenp.prettier-vscode && \
@@ -50,4 +23,5 @@ RUN apt update && \
     /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension zobo.php-intellisense && \
     /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension mohamedbenhida.laravel-intellisense && \
     /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension recca0120.vscode-phpunit && \
-    /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension felixfbecker.php-debug
+    /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension felixfbecker.php-debug && \
+    sed -i 's/zend_extension=xdebug.so/;zend_extension = "xdebug.so"\n\n; 下記は常時設定しておきます\nxdebug.client_host = 127.0.0.1\nxdebug.client_port = "9003"\nxdebug.mode = debug\nxdebug.idekey = "PHPSTORM"\nxdebug.start_with_request = yes/' /etc/php/8.2/cli/conf.d/20-xdebug.ini
