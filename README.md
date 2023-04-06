@@ -78,6 +78,23 @@ xdebug.mode = debug
 xdebug.idekey = "PHPSTORM"
 xdebug.start_with_request = yes
 ```
+
+## containerからkubeのyamlを生成する方法
+```
+podman generate kube -s -f php-server1.yaml <container_id1>
+podman generate kube -s -f php-server2.yaml <container_id2>
+podman generate kube -s -f php-server3.yaml <container_id3>
+```
+
+生成後、下記のように権限付与しないと、openshiftのpodを作った後に失敗する
+```
+spec:
+  securityContext:
+    fsGroup: 0
+  containers:
+```
+imageを`localhost/code-server-php8:latest`から`quay.io/jiadchen/code-server-php8`に変更する
+
 ## Openshiftへのデプロイ方法
 openshiftにデプロイするために、containerファイルをquay.ioにアップロードしてquay.ioにbuildしてもらう必要がある  
 なぜなら、MacOSでビルドしたイメージはarm用のものになっているので、openshift上で使えない可能性があります。quay.ioにビルドしてもらったほうが安全。  

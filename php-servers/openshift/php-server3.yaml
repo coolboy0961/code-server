@@ -5,14 +5,14 @@
 apiVersion: v1
 kind: Service
 metadata:
+  creationTimestamp: "2023-04-05T10:57:42Z"
   labels:
     app: code-server3-pod
   name: code-server3-pod
-  namespace: code-server
 spec:
   ports:
     - name: "8443"
-      nodePort: 31732
+      nodePort: 31703
       port: 8443
       targetPort: 8443
   selector:
@@ -22,23 +22,40 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
+  creationTimestamp: "2023-04-05T10:57:42Z"
   labels:
     app: code-server3-pod
   name: code-server3-pod
 spec:
+  securityContext:
+    fsGroup: 0
   containers:
-    - env:
+    - args:
+        - sh
+        - -c
+        - |-
+          cd /config/workspace
+          sudo -u abc git clone https://github.com/coolboy0961/learn-clean-architecture.git
+          cd learn-clean-architecture/api/laravel10.x/
+          sudo -u abc touch database.sqlite
+          export COMPOSER_ALLOW_SUPERUSER=1
+          export HOME=/config
+          sudo -u abc composer install
+          tail -f /dev/null
+      env:
         - name: PASSWORD
           value: for_service_portal
+        - name: SUDO_PASSWORD
+          value: password
         - name: DEFAULT_WORKSPACE
           value: /config/workspace
-        - name: TZ
-          value: Asia/Tokyo
         - name: PUID
           value: "1000"
         - name: PGID
           value: "1000"
-      image: quay.io/jiadchen/code-server-php8
+        - name: TZ
+          value: Asia/Tokyo
+      image: quay.io/jiadchen/code-server-php8:latest
       name: code-server3
       ports:
         - containerPort: 8443
