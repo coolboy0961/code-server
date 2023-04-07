@@ -21,7 +21,6 @@ RUN apt update && \
     /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension PKief.material-icon-theme && \
     /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension mhutchie.git-graph && \
     /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension zobo.php-intellisense && \
-    /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension mohamedbenhida.laravel-intellisense && \
     /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension recca0120.vscode-phpunit && \
     /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension felixfbecker.php-debug && \
     sed -i 's/zend_extension=xdebug.so/;zend_extension = "xdebug.so"\n\n; 下記は常時設定しておきます\nxdebug.client_host = 127.0.0.1\nxdebug.client_port = "9003"\nxdebug.mode = debug\nxdebug.idekey = "PHPSTORM"\nxdebug.start_with_request = yes/' /etc/php/8.2/cli/conf.d/20-xdebug.ini
