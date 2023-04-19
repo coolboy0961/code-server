@@ -15,6 +15,7 @@ RUN apt update && \
     mv ./composer.phar $(dirname $(which php))/composer && chmod +x "$_" && \
     git config --global user.name "Jiadong Chen" && \
     git config --global user.email "jiadchen@redhat.com" && \
+    sed -i 's/zend_extension=xdebug.so/;zend_extension = "xdebug.so"\n\n; 下記は常時設定しておきます\nxdebug.client_host = 127.0.0.1\nxdebug.client_port = "9003"\nxdebug.mode = debug\nxdebug.idekey = "PHPSTORM"\nxdebug.start_with_request = yes/' /etc/php/8.2/cli/conf.d/20-xdebug.ini && \
     /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension dracula-theme.theme-dracula && \
     /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension oderwat.indent-rainbow && \
     /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension esbenp.prettier-vscode && \
@@ -23,4 +24,4 @@ RUN apt update && \
     /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension zobo.php-intellisense && \
     /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension recca0120.vscode-phpunit && \
     /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension felixfbecker.php-debug && \
-    sed -i 's/zend_extension=xdebug.so/;zend_extension = "xdebug.so"\n\n; 下記は常時設定しておきます\nxdebug.client_host = 127.0.0.1\nxdebug.client_port = "9003"\nxdebug.mode = debug\nxdebug.idekey = "PHPSTORM"\nxdebug.start_with_request = yes/' /etc/php/8.2/cli/conf.d/20-xdebug.ini
+    /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension MehediDracula.php-namespace-resolver

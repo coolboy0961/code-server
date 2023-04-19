@@ -1,0 +1,13 @@
+FROM lscr.io/linuxserver/code-server:latest
+LABEL description="java17の実行環境を構築した code-server container image"
+LABEL maintainer="Jiadong Chen <jiadchen@redhat.com>"
+SHELL ["/bin/bash", "-c"]
+RUN apt update && \
+    apt install -y openjdk-17-jdk unzip zip && \
+    java -version && \
+    git config --global user.name "Jiadong Chen" && \
+    git config --global user.email "jiadchen@redhat.com" && \
+    /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension dracula-theme.theme-dracula && \
+    /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension vscjava.vscode-java-pack && \
+    /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension Pivotal.vscode-boot-dev-pack && \
+    /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension ritwickdey.LiveServer
