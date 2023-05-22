@@ -1,0 +1,55 @@
+# Save the output of this file and use kubectl create -f to import
+# it into Kubernetes.
+#
+# Created with podman-4.4.2
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: code-server1-pod
+  name: code-server1-pod
+spec:
+  ports:
+    - name: "8443"
+      nodePort: 30139
+      port: 8443
+      targetPort: 8443
+  selector:
+    app: code-server1-pod
+  type: NodePort
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: code-server1-pod
+  name: code-server1-pod
+spec:
+  securityContext:
+    fsGroup: 0
+  containers:
+    - args:
+        - sh
+        - -c
+        - |
+          cd /config/workspace
+          sudo -u abc git clone https://github.com/coolboy0961/learn-tdd.git
+          tail -f /dev/null
+      env:
+        - name: TZ
+          value: Asia/Tokyo
+        - name: DEFAULT_WORKSPACE
+          value: /config/workspace
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        - name: PASSWORD
+          value: dfIhfkJdHHSDes
+        - name: SUDO_PASSWORD
+          value: password
+      image: quay.io/jiadchen/code-server-java17:latest
+      name: code-server1
+      ports:
+        - containerPort: 8443
+          hostPort: 8443
