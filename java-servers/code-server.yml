@@ -2,8 +2,11 @@
 version: "2.1"
 services:
   code-server1:
-    image: localhost/code-server-java17:latest
+    # image: localhost/code-server-java17:latest
     # image: quay.io/jiadchen/code-server-java17
+    build:
+      context: .
+      dockerfile: Containerfile
     container_name: java-server1
     environment:
       - PUID=1000
@@ -20,8 +23,11 @@ services:
       - 8443:8443
     restart: unless-stopped
   code-server2:
-    image: localhost/code-server-java17:latest
+    # image: localhost/code-server-java17:latest
     # image: quay.io/jiadchen/code-server-java17
+    build:
+      context: .
+      dockerfile: Containerfile
     container_name: java-server2
     environment:
       - PUID=1000

@@ -9,5 +9,5 @@ RUN apt update && \
     git config --global user.email "jiadchen@redhat.com" && \
     /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension dracula-theme.theme-dracula && \
     /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension vscjava.vscode-java-pack && \
-    /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension Pivotal.vscode-boot-dev-pack && \
+    /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension vmware.vscode-boot-dev-pack && \
     /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension ritwickdey.LiveServer
