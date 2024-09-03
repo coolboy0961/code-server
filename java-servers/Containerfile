@@ -3,11 +3,15 @@ LABEL description="java17の実行環境を構築した code-server container im
 LABEL maintainer="Jiadong Chen <jiadchen@redhat.com>"
 SHELL ["/bin/bash", "-c"]
 RUN apt update && \
-    apt install -y openjdk-17-jdk unzip zip && \
+    apt install -y openjdk-17-jdk unzip zip maven && \
     java -version && \
+    curl -sSL https://get.docker.com/ | sh && \
+    curl -LO https://github.com/openshift/source-to-image/releases/download/v1.4.0/source-to-image-v1.4.0-d3544c7e-linux-amd64.tar.gz && \
+    tar -xvzf source-to-image-v1.4.0-d3544c7e-linux-amd64.tar.gz && \
+    mv s2i /usr/local/bin/ && \
+    chmod +x /usr/local/bin/s2i && \
     git config --global user.name "Jiadong Chen" && \
     git config --global user.email "jiadchen@redhat.com" && \
     /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension dracula-theme.theme-dracula && \
     /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension vscjava.vscode-java-pack && \
-    /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension vmware.vscode-boot-dev-pack && \
     /app/code-server/bin/code-server --extensions-dir /config/extensions --install-extension ritwickdey.LiveServer

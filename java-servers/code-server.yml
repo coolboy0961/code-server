@@ -8,6 +8,7 @@ services:
       context: .
       dockerfile: Containerfile
     container_name: java-server1
+    privileged: true
     environment:
       - PUID=1000
       - PGID=1000
@@ -22,6 +23,7 @@ services:
     ports:
       - 8443:8443
     restart: unless-stopped
+    command: ["/bin/sh", "-c", "sudo service docker start && tail -f /dev/null"]
   code-server2:
     # image: localhost/code-server-java17:latest
     # image: quay.io/jiadchen/code-server-java17
@@ -29,6 +31,7 @@ services:
       context: .
       dockerfile: Containerfile
     container_name: java-server2
+    privileged: true
     environment:
       - PUID=1000
       - PGID=1000
@@ -43,3 +46,4 @@ services:
     ports:
       - 8444:8443
     restart: unless-stopped
+    command: ["/bin/sh", "-c", "sudo service docker start && tail -f /dev/null"]
